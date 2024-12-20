@@ -18,7 +18,7 @@ jobs:
         run: pipx install poetry
       
       - name: Install Dependencies
-        run: poetry install --no-lock
+        run: poetry install
       
       - name: Run Lint and Tests
         run: poetry run task test
