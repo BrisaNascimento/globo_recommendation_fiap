@@ -7,10 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.115.6"
 pandas = "^2.2.3"
 pydantic = "^2.10.4"
 pydantic-settings = "^2.7.0"
+fastapi = {extras = ["standard"], version = "^0.115.6"}
 
 
 [tool.poetry.group.dev.dependencies]
@@ -42,7 +42,7 @@ addopts = '-p no:warnings'
 [tool.taskipy.tasks]
 lint = 'ruff check .&& ruff check . --diff'
 format = 'ruff check . --fix && ruff format .'
-run = 'fastapi dev [UPDATE fastapi APP PATH]'
+run = 'fastapi dev globo_recommendation_fiap/app/app.py'
 pre_test = 'task lint'
 test = 'pytest -s --cov=globo_recommendation_fiap -vv'
 post_test = 'coverage html'
