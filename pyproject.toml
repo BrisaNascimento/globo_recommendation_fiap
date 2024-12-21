@@ -11,6 +11,9 @@ pandas = "^2.2.3"
 pydantic = "^2.10.4"
 pydantic-settings = "^2.7.0"
 fastapi = {extras = ["standard"], version = "^0.115.6"}
+mkdocs-material = "^9.5.49"
+mkdocstrings-python = "^1.12.2"
+pymdown-extensions = "^10.12"
 
 
 [tool.poetry.group.dev.dependencies]
