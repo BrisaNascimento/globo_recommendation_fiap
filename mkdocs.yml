@@ -1,0 +1,22 @@
+site_name: Globo Recommendation FIAP Docs
+
+theme:
+  name: material
+
+plugins:
+ - mkdocstrings
+
+markdown_extensions:
+ - pymdownx.emoji
+ - pymdownx.tasklist
+ - pymdownx.mark
+ - pymdownx.tilde
+ - pymdownx.highlight
+
+nav:
+ - Overview: index.md
+ - Project: project.md 
+ - System architecture : sysarchitecture.md
+ - Model: model.md
+ - API Documentation: API.md
+ - Checklist: checklist.md
