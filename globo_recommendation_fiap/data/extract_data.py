@@ -1,27 +1,37 @@
 import os
 import sys
-import pandas as pd
 from io import StringIO
+
+import pandas as pd
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils.settings import Settings
 from utils.lake_connector import connect_to_adls
+
 
 class CombineData:
     def __init__(self, data_path):
         """
-        Initializes the class with the path to the folder containing raw CSV files.
+        Initializes the class with the path to the folder containing raw CSV
+        files.
         """
-        self.data_path = data_path 
+        self.data_path = data_path
         self.dataframes = []
 
-    def clean_series(self, series):
+    @staticmethod
+    def clean_series(series):
         """
         Cleans specific characters for each column in dataframe.
         """
-        return series.map(lambda x: str(x).replace(r'\n', ' ').replace(r"'", ' ').replace(r"[", ' ').replace(r"]", ' '))
-    
+
+        return series.map(
+            lambda x: str(x)
+            .replace(r'\n', ' ')
+            .replace(r"'", ' ')
+            .replace(r"[", ' ')
+            .replace(r"]", ' ')
+        )
+
     def load_files(self):
         """
         Loads all CSV files into a list of DataFrames.
@@ -43,8 +53,7 @@ class CombineData:
         self.combined_df = pd.concat(self.dataframes, ignore_index=True)
         print("CSV files successfully combined")
 
-    
-    def upload_to_dl(self, container_name:str, file_path:str):
+    def upload_to_dl(self, container_name: str, file_path: str):
         """
         Saves the combined DataFrame into a Datalake blob.
         """
@@ -57,16 +66,17 @@ class CombineData:
             blob.upload_blob(csv_buffer.getvalue(), overwrite=True)
         except Exception as e:
             print(f"Upload csv to lake was failed.{e}")
-        else: 
+        else:
             print('Upload csv to lake was sucessful')
             return True
 
+
 if __name__ == "__main__":
-    data_path = "globo_recommendation_fiap/data/tt/"
+    data_path = "globo_recommendation_fiap/data/train_data/"
     container_name = 'bronze'
-    file_path = 'raw/globo/apagar.csv'
+    file_path = 'raw/globo/treino.csv'
 
     comb = CombineData(data_path)
-    comb.load_files()           
-    comb.combine_files()        
+    comb.load_files()
+    comb.combine_files()
     comb.upload_to_dl(container_name, file_path)

@@ -1,17 +1,20 @@
-from azure.storage.blob import BlobClient
-import sys
 import os
+import sys
+
+from azure.storage.blob import BlobClient
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from utils.settings import Settings
+
 
 def connect_to_adls(container_name: str, blob_name: str):
     """
     Connect to Azure Data Lake storage.
 
     Params:
-    container_name (str): Specific container that usually represents a layer in a Data Lake.
+    container_name (str): Specific container that usually represents a layer
+    in a Data Lake.
     blob_name (str): The full path to the intended file within a container.
     """
     connection_string = Settings().BLOB_API_KEY
