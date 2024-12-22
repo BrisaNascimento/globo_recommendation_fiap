@@ -42,7 +42,7 @@ for i in range(len(aux)):
     if user != prev_user:
         relevance = 1
     else:
-        relevance = relevance + 1
+        relevance += 1
     rel_col.append(relevance)
     prev_user = user
 inverse_aux['relevance'] = rel_col

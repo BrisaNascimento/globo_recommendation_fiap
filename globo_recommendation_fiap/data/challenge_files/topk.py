@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from collections import defaultdict
-from collections import Counter
-
 import glob
+from collections import Counter, defaultdict
+
 import pandas as pd
 
 histories = defaultdict(Counter)
