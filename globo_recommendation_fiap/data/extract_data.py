@@ -1,8 +1,12 @@
+import io
 import os
 import sys
-from io import StringIO
 
 import pandas as pd
+
+# from io import StringIO
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -10,7 +14,7 @@ from utils.lake_connector import connect_to_adls
 
 
 class CombineData:
-    def __init__(self, data_path):
+    def __init__(self, data_path: str):
         """
         Initializes the class with the path to the folder containing raw CSV
         files.
@@ -32,7 +36,7 @@ class CombineData:
             .replace(r"]", ' ')
         )
 
-    def load_files(self):
+    def load_files(self) -> list:
         """
         Loads all CSV files into a list of DataFrames.
         """
@@ -42,41 +46,52 @@ class CombineData:
                 df = pd.read_csv(file_path)
                 df_cleaned = df.apply(self.clean_series)
                 self.dataframes.append(df_cleaned)
-        print(f"{len(self.dataframes)} CSV files loaded.")
 
-    def combine_files(self):
+        print(f"{len(self.dataframes)} CSV files loaded.")
+        return self.dataframes
+
+    def combine_files(self) -> pd.DataFrame:
         """
         Combines all loaded DataFrames into a single DataFrame.
         """
         if not self.dataframes:
             raise ValueError("CSV file was not loaded.")
         self.combined_df = pd.concat(self.dataframes, ignore_index=True)
-        print("CSV files successfully combined")
 
-    def upload_to_dl(self, container_name: str, file_path: str):
+        print("CSV files successfully combined.")
+        return self.combined_df
+
+    def convert_upload_to_dl(
+            self, container_name: str, file_path: str
+        ) -> None:
         """
-        Saves the combined DataFrame into a Datalake blob.
+        Convert Dataframe to Parquet and saves the combined data into
+         a Datalake blob.
         """
         try:
+            # Connecto to ADLS
             blob_name = file_path
             blob = connect_to_adls(container_name, blob_name)
-            csv_buffer = StringIO()
-            self.combined_df.to_csv(csv_buffer, index=False, encoding='utf-8')
-            csv_buffer.seek(0)
-            blob.upload_blob(csv_buffer.getvalue(), overwrite=True)
+            # Create Buffer in Parquet format
+            buffer = io.BytesIO()
+            table = pa.Table.from_pandas(self.combined_df)
+            pq.write_table(table, buffer)
+            buffer.seek(0)
+            # Upload blob
+            blob.upload_blob(buffer.getvalue(), overwrite=True)
         except Exception as e:
-            print(f"Upload csv to lake was failed.{e}")
+            print(f"Upload parquet to lake was failed.{e}")
         else:
-            print('Upload csv to lake was sucessful')
+            print('Upload parquet to lake was sucessful.')
             return True
 
 
 if __name__ == "__main__":
     data_path = "globo_recommendation_fiap/data/train_data/"
     container_name = 'bronze'
-    file_path = 'raw/globo/treino.csv'
+    file_path = 'raw/globo/treino/treino.parquet'
 
     comb = CombineData(data_path)
     comb.load_files()
     comb.combine_files()
-    comb.upload_to_dl(container_name, file_path)
+    comb.convert_upload_to_dl(container_name, file_path)
