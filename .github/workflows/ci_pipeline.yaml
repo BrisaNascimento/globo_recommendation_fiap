@@ -5,8 +5,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
   
-  env:
-    BLOB_API_KEY: ${{ secrets.BLOB_API_KEY }}
+    env:
+      BLOB_API_KEY: ${{ secrets.BLOB_API_KEY }}
 
     steps:
       - name: Copy Repository files from GH to workflow
