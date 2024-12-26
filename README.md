@@ -19,6 +19,7 @@ task test
 * pre-test: Will run the lint and format
 * test: Will run pytest
 * post-test: Will create the coverage file
+* docs: Will start the mkdocs server
 
 Note: If you simply run task test taskipy already understands that it must also run pre and post test meaning that all 3 comands are executed with a simple task test comand
 
