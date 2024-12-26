@@ -10,7 +10,7 @@ import pyarrow.parquet as pq
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils.lake_connector import connect_to_adls
+from globo_recommendation_fiap.utils.lake_connector import connect_to_adls
 
 
 class CombineData:
@@ -32,8 +32,8 @@ class CombineData:
             lambda x: str(x)
             .replace(r'\n', ' ')
             .replace(r"'", ' ')
-            .replace(r"[", ' ')
-            .replace(r"]", ' ')
+            .replace(r'[', ' ')
+            .replace(r']', ' ')
         )
 
     def load_files(self) -> list:
@@ -41,13 +41,13 @@ class CombineData:
         Loads all CSV files into a list of DataFrames.
         """
         for file in os.listdir(self.data_path):
-            if file.endswith(".csv"):
+            if file.endswith('.csv'):
                 file_path = os.path.join(self.data_path, file)
                 df = pd.read_csv(file_path)
                 df_cleaned = df.apply(self.clean_series)
                 self.dataframes.append(df_cleaned)
 
-        print(f"{len(self.dataframes)} CSV files loaded.")
+        print(f'{len(self.dataframes)} CSV files loaded.')
         return self.dataframes
 
     def combine_files(self) -> pd.DataFrame:
@@ -55,15 +55,15 @@ class CombineData:
         Combines all loaded DataFrames into a single DataFrame.
         """
         if not self.dataframes:
-            raise ValueError("CSV file was not loaded.")
+            raise ValueError('CSV file was not loaded.')
         self.combined_df = pd.concat(self.dataframes, ignore_index=True)
 
-        print("CSV files successfully combined.")
+        print('CSV files successfully combined.')
         return self.combined_df
 
     def convert_upload_to_dl(
-            self, container_name: str, file_path: str
-        ) -> None:
+        self, container_name: str, file_path: str
+    ) -> None:
         """
         Convert Dataframe to Parquet and saves the combined data into
          a Datalake blob.
@@ -80,14 +80,14 @@ class CombineData:
             # Upload blob
             blob.upload_blob(buffer.getvalue(), overwrite=True)
         except Exception as e:
-            print(f"Upload parquet to lake was failed.{e}")
+            print(f'Upload parquet to lake was failed.{e}')
         else:
             print('Upload parquet to lake was sucessful.')
             return True
 
 
-if __name__ == "__main__":
-    data_path = "globo_recommendation_fiap/data/train_data/"
+if __name__ == '__main__':  # pragma: no cover
+    data_path = 'globo_recommendation_fiap/data/train_data/'
     container_name = 'bronze'
     file_path = 'raw/globo/treino/treino.parquet'
 

@@ -8,21 +8,19 @@ df = pd.read_csv(f'{conjunto}.csv')
 
 # Faz um explode para a lista virar uma coluna nova
 # Trata a string antes
-order = (df['history'].
- str.replace('\n', ' ').
- str.replace("'", ' ').
- str.replace("[", ' ').
- str.replace("]", ' ').
- str.strip().
- str.split().
- explode()
+order = (
+    df['history']
+    .str.replace('\n', ' ')
+    .str.replace("'", ' ')
+    .str.replace('[', ' ')
+    .str.replace(']', ' ')
+    .str.strip()
+    .str.split()
+    .explode()
 )
 
 # Cola o userId do df no explodido
-aux = pd.merge(
-    df['userId'], order,
-    left_index=True, right_index=True
-)
+aux = pd.merge(df['userId'], order, left_index=True, right_index=True)
 
 # Teste de sanidade (que passa).
 # Verifica se os usuários estão aparecendo sempre
@@ -48,5 +46,4 @@ for i in range(len(aux)):
 inverse_aux['relevance'] = rel_col
 final = inverse_aux[::-1]
 
-final.to_csv(f'{conjunto}_kaggle.csv',
-             header=True, index=False)
+final.to_csv(f'{conjunto}_kaggle.csv', header=True, index=False)

@@ -6,7 +6,7 @@ import pandas as pd
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils.lake_connector import connect_to_adls
+from globo_recommendation_fiap.utils.lake_connector import connect_to_adls
 
 
 def download_from_adls(container_name: str, file_path: str) -> pd.DataFrame:
@@ -32,9 +32,9 @@ def download_from_adls(container_name: str, file_path: str) -> pd.DataFrame:
     return data
 
 
-if __name__ == "__main__":
-    container_name = "bronze"
-    file_path = "raw/globo/validacao/validacao.parquet"
+if __name__ == '__main__':  # pragma: no cover
+    container_name = 'bronze'
+    file_path = 'raw/globo/validacao/validacao.parquet'
     # file_path = "raw/globo/itens/itens.parquet"
     # file_path = "raw/globo/teste/teste.parquet"
     # file_path = "raw/globo/treino/treino.parquet"
@@ -42,3 +42,5 @@ if __name__ == "__main__":
     # file_path = "raw/globo/validacao/validacao.parquet"
     data = download_from_adls(container_name, file_path)
     print(data.head())
+    print(isinstance(data, pd.DataFrame))
+    print(len(data.head()))

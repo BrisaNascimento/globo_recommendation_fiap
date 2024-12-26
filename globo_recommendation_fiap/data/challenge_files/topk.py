@@ -13,12 +13,13 @@ for fpath in glob.glob('./treino/*.csv'):
     for _, row in df.iterrows():
         user = row['userId']
         hist = row['history']
-        hist = (hist.
-                replace('\n', ' ').
-                replace("'", ' ').
-                replace("[", ' ').
-                replace("]", ' ').
-                strip().split()
+        hist = (
+            hist.replace('\n', ' ')
+            .replace("'", ' ')
+            .replace('[', ' ')
+            .replace(']', ' ')
+            .strip()
+            .split()
         )
         histories[user].update(hist)
 

@@ -5,7 +5,7 @@ from azure.storage.blob import BlobClient
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils.settings import Settings
+from globo_recommendation_fiap.utils.settings import Settings
 
 
 def connect_to_adls(container_name: str, blob_name: str):
@@ -21,13 +21,13 @@ def connect_to_adls(container_name: str, blob_name: str):
     blob = BlobClient.from_connection_string(
         conn_str=connection_string,
         container_name=container_name,
-        blob_name=blob_name
+        blob_name=blob_name,
     )
     return blob
 
 
-if __name__ == "__main__":
-    container_name = "bronze"
+if __name__ == '__main__':  # pragma: no cover
+    container_name = 'bronze'
     blob_name = 'raw/globo/teste.csv'
     blob = connect_to_adls(container_name, blob_name)
     print(blob)
