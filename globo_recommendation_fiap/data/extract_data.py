@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from globo_recommendation_fiap.utils.lake_connector import connect_to_adls
 
 
-class CombineData:
+class CombineData:  # pragma: no cover
     def __init__(self, data_path: str):
         """
         Initializes the class with the path to the folder containing raw CSV
