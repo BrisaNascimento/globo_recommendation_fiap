@@ -17,6 +17,7 @@ pymdown-extensions = "^10.12"
 azure-storage-blob = "^12.24.0"
 pyarrow = "^18.1.0"
 scikit-learn = "^1.6.0"
+scipy = "^1.14.1"
 
 
 [tool.poetry.group.dev.dependencies]
