@@ -4,7 +4,7 @@ In this document we are going to provide some initial guidance on how to work wi
 
     1. Environment variables: the enviroment variables must be added into a file .env in the root of this project, every variable regardless where this is used must be added there. We are going to use pydantic settings to consume it.
 
-    2 Taskipy: to facilitate test runs, lint and API run we have implemented taskipy in the dev environmenr, to run any of the available commands you should run the below comand in you shell for eg tests
+    2. Taskipy: to facilitate test runs, lint and API run we have implemented taskipy in the dev environmenr, to run any of the available commands you should run the below comand in you shell for eg tests
 
 ## Comand Example for Taskipy
 ```bash
@@ -23,4 +23,11 @@ task test
 
 Note: If you simply run task test taskipy already understands that it must also run pre and post test meaning that all 3 comands are executed with a simple task test comand
 
+## Intructions to install Implicit library for ML (instructions for Windows users)
 
+    1. You need to install C++ compiler so you can either download visual studio community or install the Desktop development with C++ workload:
+        * CPP tools download: [Site to Download](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+
+        * Or visual studio community download: [Site to Download](https://visualstudio.microsoft.com/visual-studio-community/)
+
+    2. Install CMake and add it to path: [Site do Download](https://cmake.org/download/)

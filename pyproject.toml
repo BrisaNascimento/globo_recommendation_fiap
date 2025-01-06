@@ -19,6 +19,7 @@ pyarrow = "^18.1.0"
 scikit-learn = "^1.6.0"
 scipy = "^1.14.1"
 sentence-transformers = "^3.3.1"
+implicit = "^0.7.2"
 
 
 [tool.poetry.group.dev.dependencies]
