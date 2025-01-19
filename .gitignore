@@ -55,6 +55,9 @@ coverage.xml
 .pytest_cache/
 cover/
 
+#MLRuns
+mlruns/
+
 # Translations
 *.mo
 *.pot

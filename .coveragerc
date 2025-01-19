@@ -1,0 +1,8 @@
+[run]
+omit =
+    als_collaborative_filtering.py
+    preprocessing_utils.py
+    matrix_generator.py
+    __init__.py
+    data_pipeline.py
+    extract_data.py
