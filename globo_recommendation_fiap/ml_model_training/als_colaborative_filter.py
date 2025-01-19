@@ -84,7 +84,8 @@ if __name__ == '__main__':
     #     'page_id': [101, 102, 101, 103, 104],
     #     'interaction_score': [5, 3, 4, 2, 1],
     # }
-    data = pd.read_parquet('globo_recommendation_fiap/data/challenge_files/local/user_colab_filter.parquet')
+    path = 'globo_recommendation_fiap/data/challenge_files/local'
+    data = pd.read_parquet(f'{path}/user_colab_filter.parquet')
     data = data.head(2000)
     row = 'userId'
     column = 'history'
