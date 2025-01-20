@@ -24,6 +24,9 @@ theme:
       primary: blue
       accent: deep orange
 
+extra_css:
+  - extra.css
+
 plugins:
  - mkdocstrings
 
@@ -33,6 +36,9 @@ markdown_extensions:
  - pymdownx.mark
  - pymdownx.tilde
  - pymdownx.highlight
+ - admonition
+ - pymdownx.details
+ - pymdownx.superfences
 
 nav:
  - Overview: index.md
