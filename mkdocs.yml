@@ -42,8 +42,14 @@ markdown_extensions:
 
 nav:
  - Overview: index.md
- - Project: project.md 
+ - Requirements: project-requirements.md
+ - Avaliable Data: data-describe.md
  - System architecture : sysarchitecture.md
- - Model: model.md
+ - Model:
+     - Features: model-features.md
+     - Parameters and Structure: model-parameters.md
+     - Training: model-training.md
+     - Saving: model-saving.md
  - API Documentation: API.md
+ - Deployment: deploy.md
  - Checklist: checklist.md
