@@ -27,6 +27,8 @@ llvmlite = "^0.43.0"
 umap-learn = "^0.5.7"
 matplotlib = "^3.10.0"
 mlflow = "^2.19.0"
+optuna = "^4.2.0"
+surprise = "^0.1"
 
 
 [tool.poetry.group.dev.dependencies]
