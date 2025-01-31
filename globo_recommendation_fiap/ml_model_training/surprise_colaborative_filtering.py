@@ -138,12 +138,11 @@ class ColaborativeFilterExperiment:
 if __name__ == '__main__':
     path = 'globo_recommendation_fiap/data/challenge_files/local'
     data = pd.read_parquet(f'{path}/acessos_filtrados.parquet')
-    train_data = data[['userId','history','flag_read']]
+    train_data = data[['userId', 'history', 'flag_read']]
     train_data_test = train_data.iloc[:10000]
-    experiment = "Teste_classe_surprise"
+    experiment = 'Teste_classe_surprise'
     ml_experiment = ColaborativeFilterExperiment(
-        experiment_name=experiment,
-        data=train_data)
-    
-    ml_experiment.run_experiment()
+        experiment_name=experiment, data=train_data
+    )
 
+    ml_experiment.run_experiment()
