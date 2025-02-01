@@ -110,8 +110,8 @@ class ColaborativeFilterExperiment:
     def run_experiment(
         self,
         rating_field: str = 'flag_read',
-        rating_a: int = 0,
-        rating_b: int = 1,
+        rating_a: int = 1,
+        rating_b: int = 0,
     ):
         reader = Reader(rating_scale=(rating_a, rating_b))
         self._data = Dataset.load_from_df(
@@ -140,9 +140,9 @@ if __name__ == '__main__':
     data = pd.read_parquet(f'{path}/acessos_filtrados.parquet')
     train_data = data[['userId', 'history', 'flag_read']]
     train_data_test = train_data.iloc[:10000]
-    experiment = 'Teste_classe_surprise'
+    experiment = 'Teste Surprise Few Data'
     ml_experiment = ColaborativeFilterExperiment(
-        experiment_name=experiment, data=train_data
+        experiment_name=experiment, data=train_data_test
     )
 
     ml_experiment.run_experiment()
