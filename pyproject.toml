@@ -30,6 +30,7 @@ mlflow = "^2.19.0"
 optuna = "^4.2.0"
 scikit-surprise = "^1.1.4"
 numpy = "<2.0"
+bentoml = "^1.3.20"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -51,6 +52,7 @@ exclude = ['.venv', '*.ipynb']
 [tool.ruff.lint]
 preview = true
 select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+ignore =["PLR6301"]
 
 [tool.ruff.format]
 preview = true
@@ -70,3 +72,4 @@ post_test = 'coverage html'
 docs = 'mkdocs serve'
 ml_flow_start = 'mlflow server --host 127.0.0.1 --port 8080'
 run_surprise = 'poetry run python -m globo_recommendation_fiap.ml_model_training.surprise_colaborative_filtering'
+register_model = 'poetry run python -m globo_recommendation_fiap.ml_model_training.register_model'

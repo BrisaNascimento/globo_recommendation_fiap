@@ -140,7 +140,7 @@ if __name__ == '__main__':
     data = pd.read_parquet(f'{path}/acessos_filtrados.parquet')
     train_data = data[['userId', 'history', 'flag_read']]
     train_data_test = train_data.iloc[:10000]
-    experiment = 'Teste Surprise Few Data'
+    experiment = 'recomender'
     ml_experiment = ColaborativeFilterExperiment(
         experiment_name=experiment, data=train_data_test
     )
