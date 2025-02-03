@@ -25,10 +25,9 @@ class Recommender:
     bento_model = bentoml.models.get('recomender:latest')
 
     def __init__(self):
-        self.model = bentoml.mlflow.load_model(self.bento_model)
-        print(f'Model type: {type(self.model)}')
-        print(f'Model: {self.model}')
-        print(f'Has Predict: {hasattr(self.model, "predict")}')
+        self.pyfunc_model = bentoml.mlflow.load_model(self.bento_model)
+        sklearn_wrapper = self.pyfunc_model._model_impl
+        self.model = sklearn_wrapper.sklearn_model
 
     @bentoml.api(batchable=False)
     def recommend(self, uid: str = S_USER, iid: str = S_ITEM) -> List[str]:
@@ -40,16 +39,22 @@ class Recommender:
         Returns:
             list[str]: Summarized texts.
         """
-        print(f'User: {uid}')
-        print(f'Item: {iid}')
 
         with bentoml.monitor('Recomendation Model') as mon:
             mon.log([uid, iid], name='request', role='input', data_type='list')
-            recomendation = self.model.predict(uid, iid)
+            prediction = self.model.predict(uid, iid)
+
+            # Format the prediction as a list of strings
+            recommendation = [
+                f'User: {prediction.uid}',
+                f'Item: {prediction.iid}',
+                f'Estimated Rating: {prediction.est}',
+                f'Details: {prediction.details}',
+            ]
             mon.log(
-                recomendation,
+                recommendation,
                 name='response',
                 role='prediction',
                 data_type='list',
             )
-            return recomendation
+            return recommendation
