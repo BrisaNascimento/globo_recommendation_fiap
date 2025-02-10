@@ -12,10 +12,10 @@ python:
 docker:
   python_version: "3.12.2"
 include:
-  - "ml_model_training/*"
-  - "mlruns/*"
-  - "requirements/*"
-  - "service.py"
+  - "*"
 exclude:
-  - "data/*"
+  - "data/challenge_files/*"
+  - "data/data_pipeline.py"
+  - "data/extract_data.py"
   - "tests/*"
+  - "htmlcov/*"

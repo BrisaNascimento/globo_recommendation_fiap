@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List
+import json
 
 import bentoml
+import pandas as pd
+
+from globo_recommendation_fiap.data.download_data import download_from_adls
+from globo_recommendation_fiap.utils.settings import Settings
 
 S_USER = '0004e1ddec9a5d67faa56bb734d733628a7841c10c7255c0c507b7d1d4114f06'
-S_ITEM = '43b8e36b-5a0b-4c76-9adf-fb5366dbc330'
 
 
 @bentoml.service(
@@ -20,41 +23,60 @@ S_ITEM = '43b8e36b-5a0b-4c76-9adf-fb5366dbc330'
     },
 )
 class Recommender:
-    """Summarization."""
+    """Content based recommender."""
 
-    bento_model = bentoml.models.get('recomender:latest')
+    bento_model = bentoml.models.get('tests_content_base_dummy:latest')
 
     def __init__(self):
         self.pyfunc_model = bentoml.mlflow.load_model(self.bento_model)
         sklearn_wrapper = self.pyfunc_model._model_impl
         self.model = sklearn_wrapper.sklearn_model
+        self.last_news = download_from_adls(
+            Settings().CONTAINER_NAME, Settings().LAST_NEWS
+        )
+        self.last_access = download_from_adls(
+            Settings().CONTAINER_NAME, Settings().LAST_ACCESS
+        )
 
     @bentoml.api(batchable=False)
-    def recommend(self, uid: str = S_USER, iid: str = S_ITEM) -> List[str]:
-        """Summarize texts.
-
-        Args:
-            texts (list[str]): Texts to be summarized.
-
-        Returns:
-            list[str]: Summarized texts.
+    def recommend(self, user: str = S_USER) -> str:
+        """
+        Make documentation
         """
 
-        with bentoml.monitor('Recomendation Model') as mon:
-            mon.log([uid, iid], name='request', role='input', data_type='list')
-            prediction = self.model.predict(uid, iid)
+        # root_path = 'globo_recommendation_fiap/data/challenge_files'
+        # recent_news = pd.read_parquet(
+        #     f'{root_path}/local/ultimas_noticias.parquet'
+        # )
+        # last_viewed_content = pd.read_parquet(
+        #     f'{root_path}/local/ultimos_acessos.parquet'
+        # )
 
-            # Format the prediction as a list of strings
-            recommendation = [
-                f'User: {prediction.uid}',
-                f'Item: {prediction.iid}',
-                f'Estimated Rating: {prediction.est}',
-                f'Details: {prediction.details}',
-            ]
+        user_base = self.last_access[
+            self.last_access['userId'] == user
+        ].reset_index()
+
+        with bentoml.monitor('Recomendation Model') as mon:
+            mon.log(user, name='request', role='input', data_type='list')
+            preds = []
+            for index, row in user_base.iterrows():
+                embbeding = row['content_embbeding'].reshape(1, -1)
+                prediction = self.model.predict(embbeding, self.last_news)
+                preds.append(prediction)
+            result = pd.concat(preds)
+            result = result[~result['page'].isin(user_base['history'])]
+
+            output_json = {
+                'userId': user,
+                'preds': result.to_dict(orient='records'),
+            }
+
+            json_string = json.dumps(output_json, indent=4, ensure_ascii=False)
+
             mon.log(
-                recommendation,
+                json_string,
                 name='response',
                 role='prediction',
-                data_type='list',
+                data_type='str',
             )
-            return recommendation
+            return json_string

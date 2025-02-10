@@ -6,3 +6,6 @@ class Settings(BaseSettings):
         env_file='.env', env_file_encoding='utf-8'
     )
     BLOB_API_KEY: str
+    CONTAINER_NAME: str
+    LAST_NEWS: str
+    LAST_ACCESS: str
