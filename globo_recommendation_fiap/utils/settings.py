@@ -9,4 +9,4 @@ class Settings(BaseSettings):
     CONTAINER_NAME: str
     LAST_NEWS: str
     LAST_ACCESS: str
-    LAST_ACCESS_PART:str
+    LAST_ACCESS_PART: str
