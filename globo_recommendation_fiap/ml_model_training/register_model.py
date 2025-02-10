@@ -18,7 +18,7 @@ class Register:
         Args:
             run_id (str): Run id.
         """
-        model_uri = f'runs:/{run_id}/colab_filter_model'
+        model_uri = f'runs:/{run_id}/content_recommender'
         # mlflow.register_model(
         #     model_uri,
         #     name=self.title,
@@ -28,7 +28,9 @@ class Register:
 
 
 if __name__ == '__main__':
-    experiment_name = 'recomender'
-    run_id = 'da20ee974e4d403b8bdc4fbdf006db3f'
+    # content_recommender or colab_filter_model
+    model_path = 'content_recommender'
+    experiment_name = 'tests_content_base_dummy'
+    run_id = '8c6bec04403f4d19b9a3615b6d267064'
     reg = Register(experiment_name)
     reg.register_model(run_id)

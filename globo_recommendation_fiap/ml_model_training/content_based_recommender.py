@@ -4,7 +4,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 class ContentRecomender:
-
     def __init__(self, top_k: int = 3):
         """
         Input:
@@ -15,7 +14,8 @@ class ContentRecomender:
         self.top_k = top_k
 
     def calculate_cosine_similarity(
-            self, reference_embbeding: np.array, news: pd.DataFrame):
+        self, reference_embbeding: np.array, news: pd.DataFrame
+    ):
         """
         This function calculate the consise similarity
         between one reference news and the filtered news dataset.
@@ -32,22 +32,22 @@ class ContentRecomender:
 
         # Calculate cosine similarity
         cosine_similarities = cosine_similarity(
-            np.vstack(news["content_embbeding"]),
-            reference_embbeding
+            np.vstack(news['content_embbeding']), reference_embbeding
         ).flatten()
 
         # Create a new column in the DataFrame
         news['cosine_similarity'] = cosine_similarities
 
         recommended_articles = news.sort_values(
-            by="cosine_similarity", ascending=False)
-        return recommended_articles[
-            ['page', 'cosine_similarity']].head(self.top_k)
+            by='cosine_similarity', ascending=False
+        )
+        return recommended_articles[['page', 'cosine_similarity']].head(
+            self.top_k
+        )
 
     def predict(
-            self,
-            reference_embbeding: pd.DataFrame,
-            recent_news: pd.DataFrame):
+        self, reference_embbeding: pd.DataFrame, recent_news: pd.DataFrame
+    ):
         """
         Function responsible for orchestrate the recomendations.
         It will receive a user and a group os reference news for that user,
@@ -64,4 +64,5 @@ class ContentRecomender:
         reference_embbeding = reference_embbeding.reshape(1, -1)
 
         return self.calculate_cosine_similarity(
-            reference_embbeding, recent_news)
+            reference_embbeding, recent_news
+        )
