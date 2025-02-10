@@ -7,6 +7,10 @@ jobs:
   
     env:
       BLOB_API_KEY: ${{ secrets.BLOB_API_KEY }}
+      CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+      LAST_NEWS: ${{ secrets.LAST_NEWS }}
+      LAST_ACCESS: ${{ secrets.LAST_ACCESS }}
+      LAST_ACCESS_PART: ${{ secrets.LAST_ACCESS_PART }}
 
     steps:
       - name: Copy Repository files from GH to workflow
