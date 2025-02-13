@@ -66,3 +66,40 @@ class ContentRecomender:
         return self.calculate_cosine_similarity(
             reference_embbeding, recent_news
         )
+
+    # added later
+
+    def predict_batch(
+        self, embeddings: np.array, recent_news: pd.DataFrame
+    ):
+        """
+        Batch prediction for multiple embeddings.
+        Input:
+            1 - embeddings: a 2D numpy array of shape (n_embeddings, 384)
+            2 - recent_news: a DataFrame containing recent news articles
+        Output:
+            1 - recommendations: a DataFrame containing all recommendations
+        for all embeddings, with columns ['page', 'cosine_similarity']
+        """
+        # Stack all embeddings into a single 2D array
+        embeddings = np.vstack(embeddings)
+
+        # Calculate cosine similarity for all embeddings at once
+        cosine_similarities = cosine_similarity(
+            np.vstack(recent_news['content_embbeding']), embeddings
+        )
+
+        # Create a DataFrame to store all recommendations
+        all_recommendations = []
+
+        # For each embedding, get the top_k recommendations
+        for i in range(cosine_similarities.shape[1]):
+            recent_news['cosine_similarity'] = cosine_similarities[:, i]
+            recommended_articles = recent_news.sort_values(
+                by='cosine_similarity', ascending=False
+            ).head(self.top_k)
+            all_recommendations.append(
+                recommended_articles[['page', 'cosine_similarity']])
+
+        # Concatenate all recommendations into a single DataFrame
+        return pd.concat(all_recommendations, ignore_index=True)
