@@ -5,10 +5,10 @@ from __future__ import annotations
 import json
 
 import bentoml
+import numpy as np
 import pandas as pd
 
-from globo_recommendation_fiap.data.download_data import download_from_adls
-from globo_recommendation_fiap.utils.settings import Settings
+from globo_recommendation_fiap.utils.db_connect import connect_to_db
 
 S_USER = '0004e1ddec9a5d67faa56bb734d733628a7841c10c7255c0c507b7d1d4114f06'
 
@@ -31,12 +31,9 @@ class Recommender:
         self.pyfunc_model = bentoml.mlflow.load_model(self.bento_model)
         sklearn_wrapper = self.pyfunc_model._model_impl
         self.model = sklearn_wrapper.sklearn_model
-        self.last_news = download_from_adls(
-            Settings().CONTAINER_NAME, Settings().LAST_NEWS
-        )
-        self.last_access = download_from_adls(
-            Settings().CONTAINER_NAME, Settings().LAST_ACCESS
-        )
+        # self.last_news = download_from_adls(
+        #     Settings().CONTAINER_NAME, Settings().LAST_NEWS
+        # )
 
     @bentoml.api(batchable=False)
     def recommend(self, user: str = S_USER) -> str:
@@ -44,24 +41,32 @@ class Recommender:
         Make documentation
         """
 
-        # root_path = 'globo_recommendation_fiap/data/challenge_files'
-        # recent_news = pd.read_parquet(
-        #     f'{root_path}/local/ultimas_noticias.parquet'
-        # )
-        # last_viewed_content = pd.read_parquet(
-        #     f'{root_path}/local/ultimos_acessos.parquet'
-        # )
+        connection = connect_to_db()
+        query = f'''
+            SELECT "userId", history, content_embbeding
+            FROM user_last_access
+            WHERE "userId" = '{user}'
+        '''
+        query_last_news = '''
+            SELECT *
+            FROM last_news
+        '''
+        query_rank = '''
+            SELECT *
+            FROM last_news_ranking
+        '''
 
-        user_base = self.last_access[
-            self.last_access['userId'] == user
-        ].reset_index()
+        user_base = pd.read_sql(query, connection)
+        user_base['content_embbeding'] = user_base['content_embbeding'].apply(
+            lambda x: np.array([float(i) for i in x.split(',')]))
+        last_news = pd.read_sql(query_last_news, connection)
 
         with bentoml.monitor('Recomendation Model') as mon:
             mon.log(user, name='request', role='input', data_type='list')
             preds = []
             for index, row in user_base.iterrows():
                 embbeding = row['content_embbeding'].reshape(1, -1)
-                prediction = self.model.predict(embbeding, self.last_news)
+                prediction = self.model.predict(embbeding, last_news)
                 preds.append(prediction)
             result = pd.concat(preds)
             result = result[~result['page'].isin(user_base['history'])]
