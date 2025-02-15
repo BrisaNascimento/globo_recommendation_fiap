@@ -51,10 +51,10 @@ class Recommender:
             SELECT *
             FROM last_news
         '''
-        query_rank = '''
-            SELECT *
-            FROM last_news_ranking
-        '''
+        # query_rank = '''
+        #     SELECT *
+        #     FROM last_news_ranking
+        # '''
 
         user_base = pd.read_sql(query, connection)
         user_base['content_embbeding'] = user_base['content_embbeding'].apply(
