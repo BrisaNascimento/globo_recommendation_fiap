@@ -30,6 +30,7 @@ optuna = "^4.2.0"
 scikit-surprise = "^1.1.4"
 numpy = "<2.0"
 bentoml = "^1.3.20"
+psycopg = {extras = ["binary"], version = "^3.2.4"}
 
 
 [tool.poetry.group.dev.dependencies]
@@ -56,6 +57,8 @@ pyarrow = "<19.0"
 fastapi = {extras = ["standard"], version = "^0.115.8"}
 azure-storage-blob = "^12.24.1"
 bentoml = "^1.3.21"
+sqlalchemy = "^2.0.38"
+psycopg = {extras = ["binary"], version = "^3.2.4"}
 
 
 [tool.poetry.group.feature_store.dependencies]
@@ -113,3 +116,6 @@ ml_flow_start = 'mlflow server --host 127.0.0.1 --port 8080'
 run_surprise = 'poetry run python -m globo_recommendation_fiap.ml_model_training.surprise_colaborative_filtering'
 run_content_recommender = 'poetry run python -m globo_recommendation_fiap.ml_model_training.content_based_ml_flow'
 register_model = 'poetry run python -m globo_recommendation_fiap.ml_model_training.register_model'
+load_data = 'poetry run python -m globo_recommendation_fiap.data.database.load_data'
+db_up = 'docker-compose -f globo_recommendation_fiap/data/database/docker-compose.yaml up -d'
+db_down = 'docker-compose -f globo_recommendation_fiap/data/database/docker-compose.yaml down'
