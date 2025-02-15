@@ -1,6 +1,4 @@
-# Project :bar_chart:
-
-## **Data**
+# Avaliable Data
 
 The dataset used in this project was provided by Globo with the aim of offering the most realistic and representative information possible. This data enables analysis closer to real-world scenarios, contributing to the relevance and applicability of the solutions developed in the project.
 

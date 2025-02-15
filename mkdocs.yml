@@ -2,6 +2,30 @@ site_name: Globo Recommendation FIAP Docs
 
 theme:
   name: material
+  #font: 
+  #  text: Merriweather Sans
+  #  code: Red Hat Mono
+  logo: assets/FIAP_logo.png
+  favicon: assets/FIAP_logo.png
+  palette:
+    # Dark Mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
+      primary: green
+      accent: deep purple
+    
+    # Light Mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Light mode
+      primary: blue
+      accent: deep orange
+
+extra_css:
+  - extra.css
 
 plugins:
  - mkdocstrings
@@ -12,11 +36,20 @@ markdown_extensions:
  - pymdownx.mark
  - pymdownx.tilde
  - pymdownx.highlight
+ - admonition
+ - pymdownx.details
+ - pymdownx.superfences
 
 nav:
  - Overview: index.md
- - Project: project.md 
+ - Requirements: project-requirements.md
+ - Avaliable Data: data-describe.md
  - System architecture : sysarchitecture.md
- - Model: model.md
+ - Model:
+     - Features: model-features.md
+     - Parameters and Structure: model-parameters.md
+     - Training: model-training.md
+     - Saving: model-saving.md
  - API Documentation: API.md
+ - Deployment: deploy.md
  - Checklist: checklist.md
