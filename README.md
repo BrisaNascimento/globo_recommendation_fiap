@@ -35,4 +35,6 @@ Note: If you simply run task test taskipy already understands that it must also 
     8. Execute task db_up (this will run the docker-compose)
     9. The final result must be a container with DB, PGADMIN and the ML api
 
+NOTE: the project documentation is being created with mkdocs so will be in a different link
+
 
