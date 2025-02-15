@@ -23,11 +23,16 @@ task test
 
 Note: If you simply run task test taskipy already understands that it must also run pre and post test meaning that all 3 comands are executed with a simple task test comand
 
-## Intructions to install Implicit library for ML (instructions for Windows users)
+## Instructions to Run the project
 
-    1. You need to install C++ compiler so you can either download visual studio community or install the Desktop development with C++ workload:
-        * CPP tools download: [Site to Download](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+    1. First of all you need a valid mlflow experiment with a model saved
+    2. run task ml_flow_start to start the ml_flow page
+    3. Get the experiment name and run id the the valid experiment
+    4. Under ml_model_training edit the file register_model to add your experiment name and run id
+    5. Execute task register_model (this wil register the ML model in Bento)
+    6. Exectute bentoml build (this will build the image based on the bentofile)
+    7. Follow the bento instructions to conteinerize the image
+    8. Execute task db_up (this will run the docker-compose)
+    9. The final result must be a container with DB, PGADMIN and the ML api
 
-        * Or visual studio community download: [Site to Download](https://visualstudio.microsoft.com/visual-studio-community/)
 
-    2. Install CMake and add it to path: [Site do Download](https://cmake.org/download/)
