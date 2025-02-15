@@ -9,8 +9,8 @@ class Settings(BaseSettings):
     CONTAINER_NAME: str
     LAST_NEWS: str
     LAST_ACCESS: str
-    LAST_NEWS_RANK: str
     LAST_ACCESS_PART: str
+    LAST_NEWS_RANK: str
     POSTGRES_PASSWORD: str
     POSTGRES_USER: str
     POSTGRES_DB: str
