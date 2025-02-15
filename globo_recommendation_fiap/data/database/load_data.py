@@ -42,7 +42,7 @@ def load_last_access_table(df: pd.DataFrame) -> None:  # pragma no_cover
         if_exists='append',
         index=False,
         method='multi',
-        chunksize=10000
+        chunksize=10000,
     )
 
     print(f"Table '{table_name}' created and data inserted successfully!")
@@ -83,7 +83,7 @@ def load_last_news(df: pd.DataFrame) -> None:  # pragma no_cover
         if_exists='append',
         index=False,
         method='multi',
-        chunksize=10000
+        chunksize=10000,
     )
 
     print(f"Table '{table_name}' created and data inserted successfully!")
@@ -119,25 +119,24 @@ def load_ranking(df: pd.DataFrame) -> None:  # pragma no_cover
         if_exists='append',
         index=False,
         method='multi',
-        chunksize=10000
+        chunksize=10000,
     )
 
     print(f"Table '{table_name}' created and data inserted successfully!")
 
 
 if __name__ == '__main__':
-
     last_access = download_from_adls(
-            Settings().CONTAINER_NAME, Settings().LAST_ACCESS
-        )
+        Settings().CONTAINER_NAME, Settings().LAST_ACCESS
+    )
 
     last_news = download_from_adls(
-            Settings().CONTAINER_NAME, Settings().LAST_NEWS
-        )
+        Settings().CONTAINER_NAME, Settings().LAST_NEWS
+    )
 
     news_rank = download_from_adls(
-            Settings().CONTAINER_NAME, Settings().LAST_NEWS_RANK
-        )
+        Settings().CONTAINER_NAME, Settings().LAST_NEWS_RANK
+    )
 
     load_last_access_table(last_access)
     load_last_news(last_news)

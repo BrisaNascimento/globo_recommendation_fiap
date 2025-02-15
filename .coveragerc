@@ -6,3 +6,5 @@ omit =
     __init__.py
     data_pipeline.py
     extract_data.py
+    globo_recommendation_fiap/ml_model_training/*
+    db_connect.py
