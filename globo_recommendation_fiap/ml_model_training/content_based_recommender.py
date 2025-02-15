@@ -69,9 +69,7 @@ class ContentRecomender:
 
     # added later
 
-    def predict_batch(
-        self, embeddings: np.array, recent_news: pd.DataFrame
-    ):
+    def predict_batch(self, embeddings: np.array, recent_news: pd.DataFrame):
         """
         Batch prediction for multiple embeddings.
         Input:
@@ -99,7 +97,8 @@ class ContentRecomender:
                 by='cosine_similarity', ascending=False
             ).head(self.top_k)
             all_recommendations.append(
-                recommended_articles[['page', 'cosine_similarity']])
+                recommended_articles[['page', 'cosine_similarity']]
+            )
 
         # Concatenate all recommendations into a single DataFrame
         return pd.concat(all_recommendations, ignore_index=True)

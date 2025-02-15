@@ -33,19 +33,22 @@ def objective(trial):
 
         # Get all embeddings for the current user
         if user_id in user_access_groups.groups:
-            user_embeddings = user_access_groups.get_group(
-                user_id)['content_embbeding'].values
+            user_embeddings = user_access_groups.get_group(user_id)[
+                'content_embbeding'
+            ].values
             user_embeddings = np.vstack(user_embeddings)
 
             # Batch predict for all embeddings of the current user
-            recommended = model.predict_batch(
-                user_embeddings, last_news)['page'].tolist()
+            recommended = model.predict_batch(user_embeddings, last_news)[
+                'page'
+            ].tolist()
         else:
             recommended = []
 
         # Calculate accuracy
-        accuracy = len(
-            set(recommended) & set(actual)) / len(actual) if actual else 0
+        accuracy = (
+            len(set(recommended) & set(actual)) / len(actual) if actual else 0
+        )
         all_accuracies.append(accuracy)
 
     mean_accuracy = np.mean(all_accuracies)
