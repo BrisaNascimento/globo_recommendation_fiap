@@ -10,7 +10,6 @@ class Settings(BaseSettings):
     LAST_NEWS: str
     LAST_ACCESS: str
     LAST_NEWS_RANK: str
-    LAST_ACCESS_PART: str
     POSTGRES_PASSWORD: str
     POSTGRES_USER: str
     POSTGRES_DB: str
