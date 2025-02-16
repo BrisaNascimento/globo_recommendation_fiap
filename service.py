@@ -25,7 +25,7 @@ S_USER = '0004e1ddec9a5d67faa56bb734d733628a7841c10c7255c0c507b7d1d4114f06'
 class Recommender:
     """Content based recommender."""
 
-    bento_model = bentoml.models.get('tests_content_base_dummy:latest')
+    bento_model = bentoml.models.get('final_model:latest')
 
     def __init__(self):
         self.pyfunc_model = bentoml.mlflow.load_model(self.bento_model)
@@ -41,7 +41,7 @@ class Recommender:
         Make documentation
         """
 
-        connection = connect_to_db()
+        engine = connect_to_db()
         query = f'''
             SELECT "userId", history, content_embbeding
             FROM user_last_access
@@ -51,23 +51,35 @@ class Recommender:
             SELECT *
             FROM last_news
         '''
-        # query_rank = '''
-        #     SELECT *
-        #     FROM last_news_ranking
-        # '''
-
-        user_base = pd.read_sql(query, connection)
-        user_base['content_embbeding'] = user_base['content_embbeding'].apply(
-            lambda x: np.array([float(i) for i in x.split(',')]))
-        last_news = pd.read_sql(query_last_news, connection)
+        query_rank = '''
+            SELECT *
+            FROM last_news_ranking
+        '''
+        with engine.connect() as connection:
+            user_base = pd.read_sql(query, connection)
+            user_base['content_embbeding'] = user_base['content_embbeding'].\
+                apply(lambda x: np.array([float(i) for i in x.split(',')]))
+            last_news = pd.read_sql(query_last_news, connection)
+            last_news['content_embbeding'] = last_news['content_embbeding'].\
+                apply(lambda x: np.array([float(i) for i in x.split(',')]))
 
         with bentoml.monitor('Recomendation Model') as mon:
             mon.log(user, name='request', role='input', data_type='list')
             preds = []
-            for index, row in user_base.iterrows():
-                embbeding = row['content_embbeding'].reshape(1, -1)
-                prediction = self.model.predict(embbeding, last_news)
-                preds.append(prediction)
+            if len(user_base) > 0:
+                for index, row in user_base.iterrows():
+                    embbeding = row['content_embbeding'].reshape(1, -1)
+                    prediction = self.model.predict(embbeding, last_news)
+                    preds.append(prediction)
+            else:
+                columns = ['page', 'rank']
+                with engine.connect() as connection:
+                    ranked_news = pd.read_sql(query_rank, connection)
+                ranked_news.columns = columns
+                ranked_news['cossine_similarity'] = 0
+                ranked_news = ranked_news[['page', 'cossine_similarity']].\
+                    head(15)
+                preds.append(ranked_news)
             result = pd.concat(preds)
             result = result[~result['page'].isin(user_base['history'])]
 

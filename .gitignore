@@ -60,6 +60,9 @@ flavio_testes/
 #MLRuns
 mlruns/*
 
+#Monitoring
+monitoring/*
+
 # Translations
 *.mo
 *.pot
