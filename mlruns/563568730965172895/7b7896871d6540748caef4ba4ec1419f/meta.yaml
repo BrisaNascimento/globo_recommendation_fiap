@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/7b7896871d6540748caef4ba4ec1419f/artifacts
+end_time: 1739487122714
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 7b7896871d6540748caef4ba4ec1419f
+run_name: wise-robin-164
+run_uuid: 7b7896871d6540748caef4ba4ec1419f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487083142
+status: 4
+tags: []
+user_id: Flavio

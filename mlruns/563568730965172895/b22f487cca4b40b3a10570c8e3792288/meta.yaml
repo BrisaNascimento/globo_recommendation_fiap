@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/b22f487cca4b40b3a10570c8e3792288/artifacts
+end_time: 1739485770774
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: b22f487cca4b40b3a10570c8e3792288
+run_name: useful-rook-785
+run_uuid: b22f487cca4b40b3a10570c8e3792288
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739485757530
+status: 4
+tags: []
+user_id: Flavio

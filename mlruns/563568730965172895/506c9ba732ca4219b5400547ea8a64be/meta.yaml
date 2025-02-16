@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/506c9ba732ca4219b5400547ea8a64be/artifacts
+end_time: 1739486409273
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 506c9ba732ca4219b5400547ea8a64be
+run_name: spiffy-bear-509
+run_uuid: 506c9ba732ca4219b5400547ea8a64be
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739486396202
+status: 4
+tags: []
+user_id: Flavio

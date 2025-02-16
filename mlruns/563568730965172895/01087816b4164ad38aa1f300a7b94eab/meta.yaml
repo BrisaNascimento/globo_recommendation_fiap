@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/01087816b4164ad38aa1f300a7b94eab/artifacts
+end_time: 1739673908565
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 01087816b4164ad38aa1f300a7b94eab
+run_name: unique-fox-888
+run_uuid: 01087816b4164ad38aa1f300a7b94eab
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739673761196
+status: 3
+tags: []
+user_id: Flavio

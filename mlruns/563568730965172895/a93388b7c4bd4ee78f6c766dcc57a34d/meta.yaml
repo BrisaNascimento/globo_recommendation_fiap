@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/a93388b7c4bd4ee78f6c766dcc57a34d/artifacts
+end_time: 1739487407137
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: a93388b7c4bd4ee78f6c766dcc57a34d
+run_name: stylish-yak-609
+run_uuid: a93388b7c4bd4ee78f6c766dcc57a34d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487407009
+status: 3
+tags: []
+user_id: Flavio

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/b913277f003848f1bcee6ff4c3852dc1/artifacts
+end_time: 1739487277657
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: b913277f003848f1bcee6ff4c3852dc1
+run_name: unruly-kit-548
+run_uuid: b913277f003848f1bcee6ff4c3852dc1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487277510
+status: 3
+tags: []
+user_id: Flavio

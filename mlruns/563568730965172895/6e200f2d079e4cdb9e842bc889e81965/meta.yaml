@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/6e200f2d079e4cdb9e842bc889e81965/artifacts
+end_time: 1739408334585
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 6e200f2d079e4cdb9e842bc889e81965
+run_name: rumbling-newt-961
+run_uuid: 6e200f2d079e4cdb9e842bc889e81965
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739408033700
+status: 4
+tags: []
+user_id: Flavio

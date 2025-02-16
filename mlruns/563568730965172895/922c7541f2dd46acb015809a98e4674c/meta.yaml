@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/922c7541f2dd46acb015809a98e4674c/artifacts
+end_time: 1739487493452
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 922c7541f2dd46acb015809a98e4674c
+run_name: blushing-perch-363
+run_uuid: 922c7541f2dd46acb015809a98e4674c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487493347
+status: 3
+tags: []
+user_id: Flavio

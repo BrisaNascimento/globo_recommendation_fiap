@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/6ee13a2da39b4d7b8907e82ae20068a5/artifacts
+end_time: 1739672715592
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 6ee13a2da39b4d7b8907e82ae20068a5
+run_name: calm-gull-233
+run_uuid: 6ee13a2da39b4d7b8907e82ae20068a5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739672699050
+status: 3
+tags: []
+user_id: Flavio

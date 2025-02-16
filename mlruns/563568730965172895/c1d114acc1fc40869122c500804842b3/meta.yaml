@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/c1d114acc1fc40869122c500804842b3/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: c1d114acc1fc40869122c500804842b3
+run_name: debonair-skunk-757
+run_uuid: c1d114acc1fc40869122c500804842b3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739672443834
+status: 1
+tags: []
+user_id: Flavio

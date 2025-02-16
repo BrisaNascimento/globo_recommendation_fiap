@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/c6e9a498a53744918f7252ab638d2c5d/artifacts
+end_time: 1739672699011
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: c6e9a498a53744918f7252ab638d2c5d
+run_name: bright-mink-660
+run_uuid: c6e9a498a53744918f7252ab638d2c5d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739672670829
+status: 3
+tags: []
+user_id: Flavio

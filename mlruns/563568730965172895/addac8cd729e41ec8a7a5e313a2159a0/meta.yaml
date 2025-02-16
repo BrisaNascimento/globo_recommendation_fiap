@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/addac8cd729e41ec8a7a5e313a2159a0/artifacts
+end_time: 1739487646727
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: addac8cd729e41ec8a7a5e313a2159a0
+run_name: casual-jay-124
+run_uuid: addac8cd729e41ec8a7a5e313a2159a0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487646597
+status: 3
+tags: []
+user_id: Flavio

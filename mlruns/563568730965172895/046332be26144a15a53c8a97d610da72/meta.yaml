@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/046332be26144a15a53c8a97d610da72/artifacts
+end_time: 1739671416691
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 046332be26144a15a53c8a97d610da72
+run_name: amazing-perch-213
+run_uuid: 046332be26144a15a53c8a97d610da72
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739671370144
+status: 4
+tags: []
+user_id: Flavio

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/ebe42038f8d54824bb71ca135490595d/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: ebe42038f8d54824bb71ca135490595d
+run_name: resilient-rat-389
+run_uuid: ebe42038f8d54824bb71ca135490595d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739674056916
+status: 1
+tags: []
+user_id: Flavio

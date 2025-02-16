@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/66d15d4cd25847989ed8c76cd46a9b11/artifacts
+end_time: 1739487472025
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 66d15d4cd25847989ed8c76cd46a9b11
+run_name: bustling-gull-611
+run_uuid: 66d15d4cd25847989ed8c76cd46a9b11
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487471888
+status: 3
+tags: []
+user_id: Flavio

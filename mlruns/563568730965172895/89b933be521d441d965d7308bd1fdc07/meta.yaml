@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/89b933be521d441d965d7308bd1fdc07/artifacts
+end_time: 1739672467901
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 89b933be521d441d965d7308bd1fdc07
+run_name: abundant-newt-834
+run_uuid: 89b933be521d441d965d7308bd1fdc07
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739672457139
+status: 4
+tags: []
+user_id: Flavio

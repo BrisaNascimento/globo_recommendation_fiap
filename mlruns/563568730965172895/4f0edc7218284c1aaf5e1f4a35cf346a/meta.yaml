@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/4f0edc7218284c1aaf5e1f4a35cf346a/artifacts
+end_time: 1739674085551
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 4f0edc7218284c1aaf5e1f4a35cf346a
+run_name: youthful-koi-391
+run_uuid: 4f0edc7218284c1aaf5e1f4a35cf346a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739674072004
+status: 3
+tags: []
+user_id: Flavio

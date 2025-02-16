@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/02ee36068bab40afa3b2cdd971747a81/artifacts
+end_time: 1739487364478
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 02ee36068bab40afa3b2cdd971747a81
+run_name: spiffy-skink-708
+run_uuid: 02ee36068bab40afa3b2cdd971747a81
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487364390
+status: 3
+tags: []
+user_id: Flavio

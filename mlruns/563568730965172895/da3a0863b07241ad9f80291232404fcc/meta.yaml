@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/da3a0863b07241ad9f80291232404fcc/artifacts
+end_time: 1739487625249
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: da3a0863b07241ad9f80291232404fcc
+run_name: bustling-donkey-785
+run_uuid: da3a0863b07241ad9f80291232404fcc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739487625118
+status: 3
+tags: []
+user_id: Flavio

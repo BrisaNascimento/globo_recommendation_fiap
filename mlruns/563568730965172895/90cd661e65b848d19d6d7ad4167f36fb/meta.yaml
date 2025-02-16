@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/90cd661e65b848d19d6d7ad4167f36fb/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 90cd661e65b848d19d6d7ad4167f36fb
+run_name: popular-asp-418
+run_uuid: 90cd661e65b848d19d6d7ad4167f36fb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739673908604
+status: 1
+tags: []
+user_id: Flavio

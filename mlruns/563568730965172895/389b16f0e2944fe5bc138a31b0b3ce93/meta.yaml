@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/389b16f0e2944fe5bc138a31b0b3ce93/artifacts
+end_time: 1739674299212
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 389b16f0e2944fe5bc138a31b0b3ce93
+run_name: capable-auk-742
+run_uuid: 389b16f0e2944fe5bc138a31b0b3ce93
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739674282498
+status: 3
+tags: []
+user_id: Flavio

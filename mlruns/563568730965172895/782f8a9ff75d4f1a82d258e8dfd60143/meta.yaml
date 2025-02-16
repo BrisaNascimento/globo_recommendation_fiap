@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Flavio/Documents/Globo_Recommendation_FIAP/mlruns/563568730965172895/782f8a9ff75d4f1a82d258e8dfd60143/artifacts
+end_time: 1739486495697
+entry_point_name: ''
+experiment_id: '563568730965172895'
+lifecycle_stage: active
+run_id: 782f8a9ff75d4f1a82d258e8dfd60143
+run_name: amusing-wolf-893
+run_uuid: 782f8a9ff75d4f1a82d258e8dfd60143
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739486485405
+status: 4
+tags: []
+user_id: Flavio
