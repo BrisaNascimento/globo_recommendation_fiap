@@ -58,12 +58,7 @@ cover/
 flavio_testes/
 
 #MLRuns
-#mlruns/
-mlruns/.trash
-mlruns/0
-mlruns/355334181857221553
-mlruns/775947111483034492
-mlruns/models
+mlruns/*
 
 # Translations
 *.mo

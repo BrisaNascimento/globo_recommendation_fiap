@@ -30,7 +30,7 @@ services:
       - postgres_pg:/var/lib/pgadmin
 
   recommender:
-    image: recommender:haribb7lf2srmhgo  # Your BentoML containerized API
+    image: recommender:dqur3t7mtsbsyhgo  # Your BentoML containerized API
     container_name: ${APP_CONTAINER_NAME}
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
