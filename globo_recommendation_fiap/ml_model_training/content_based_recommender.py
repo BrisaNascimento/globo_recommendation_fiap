@@ -41,9 +41,14 @@ class ContentRecomender:
         recommended_articles = news.sort_values(
             by='cosine_similarity', ascending=False
         )
-        return recommended_articles[['page', 'cosine_similarity']].head(
-            self.top_k
-        )
+
+        if self.top_k == -1:
+            return recommended_articles[['page', 'cosine_similarity']]
+        
+        else:
+            return recommended_articles[['page', 'cosine_similarity']].head(
+                self.top_k
+            )
 
     def predict(
         self, reference_embbeding: pd.DataFrame, recent_news: pd.DataFrame
@@ -87,18 +92,18 @@ class ContentRecomender:
             np.vstack(recent_news['content_embbeding']), embeddings
         )
 
-        # Create a DataFrame to store all recommendations
-        all_recommendations = []
+        # Calculate the mean of all embeddings 
+        cosine_similarities = pd.DataFrame(cosine_similarities.mean(axis=1), columns=['cosine_similarity'])
 
-        # For each embedding, get the top_k recommendations
-        for i in range(cosine_similarities.shape[1]):
-            recent_news['cosine_similarity'] = cosine_similarities[:, i]
-            recommended_articles = recent_news.sort_values(
-                by='cosine_similarity', ascending=False
-            ).head(self.top_k)
-            all_recommendations.append(
-                recommended_articles[['page', 'cosine_similarity']]
-            )
+        recent_news['cosine_similarity'] = cosine_similarities
+
+        # ranking by value, from lowest to highest 
+        recommended_articles = recent_news.sort_values(
+            by='cosine_similarity', ascending=False
+        )
+
+        if self.top_k != -1:
+            recommended_articles = recommended_articles.iloc[:self.top_k]
 
         # Concatenate all recommendations into a single DataFrame
-        return pd.concat(all_recommendations, ignore_index=True)
+        return recommended_articles

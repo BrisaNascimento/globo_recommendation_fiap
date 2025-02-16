@@ -5,23 +5,32 @@ import pandas as pd
 
 from .content_based_recommender import ContentRecomender
 
+last_access = None
+last_news = None
+validacao = None
 
 def get_user_data():
+
+    global last_access
+    global last_news
+    global validacao
+
     base_path = 'globo_recommendation_fiap/data/challenge_files/local'
     last_news = pd.read_parquet(f'{base_path}/ultimas_noticias.parquet')
     last_access = pd.read_parquet(f'{base_path}/ultimos_acessos.parquet')
     validacao = pd.read_parquet(f'{base_path}/acessos_val.parquet')
-    # validacao = validacao.head(1000)
 
-    return last_news, last_access, validacao
+    #Remocao das noticiais que nao estao na base de dados para avaliacao do modelo
+    filtered_validation = validacao[validacao["history"].isin(last_news["page"])]
 
+    return last_news, last_access, filtered_validation
 
-def objective(trial):
-    # Tune top_k from 1 to 50
-    top_k = trial.suggest_int('top_k', 1, 50)
+def call_recomentender_model(top_k: int = -1):
 
     last_news, last_access, validacao = get_user_data()
     model = ContentRecomender(top_k=top_k)
+    
+    in_recommendations = 0
     all_accuracies = []
 
     # Group last_access by userId for faster lookups
@@ -38,47 +47,34 @@ def objective(trial):
             ].values
             user_embeddings = np.vstack(user_embeddings)
 
+
             # Batch predict for all embeddings of the current user
-            recommended = model.predict_batch(user_embeddings, last_news)[
-                'page'
-            ].tolist()
-        else:
-            recommended = []
+            recommended = model.predict_batch(
+                user_embeddings, last_news)['page'].tolist()
 
-        # Calculate accuracy
-        accuracy = (
-            len(set(recommended) & set(actual)) / len(actual) if actual else 0
-        )
-        all_accuracies.append(accuracy)
+            if (actual in recommended): 
+                in_recommendations += 1
+                all_accuracies.append(recommended.index(actual) + 1)
+            else:
+                all_accuracies.append(np.nan)
 
-    mean_accuracy = np.mean(all_accuracies)
+    accuracy = in_recommendations/len(all_accuracies)
 
-    # Log results to MLflow
-    with mlflow.start_run(nested=True):
-        mlflow.log_param('top_k', top_k)
-        mlflow.log_metric('accuracy', mean_accuracy)
+    return accuracy 
 
-    return mean_accuracy  # Optuna maximizes this value
+def run_experiment(experiment_name: str, top_k: int = 10):
 
-
-def train_final_model(best_top_k: int):
-    final_model = ContentRecomender(top_k=best_top_k)
-    with mlflow.start_run():
-        mlflow.log_param('top_k', best_top_k)
-        mlflow.sklearn.log_model(final_model, 'content_recommender')
-
-
-def run_experiment(experiment_name: str):
     mlflow.set_experiment(experiment_name)
     with mlflow.start_run():
-        study = optuna.create_study(direction='maximize')  # Maximize accuracy
-        study.optimize(objective, n_trials=20)  # Run 20 trials
-        print('Best hyperparameters:', study.best_params)
-        best_top_k = study.best_params['top_k']
-        mlflow.end_run()
-        train_final_model(best_top_k)
+        accuracy = call_recomentender_model(top_k=top_k)
+        print (f'Accuracy: {accuracy}')
+        mlflow.log_metric('accuracy', accuracy)
+        model = ContentRecomender(top_k=top_k)
+        mlflow.sklearn.log_model(model, artifact_path= 'content_recommender')
+
 
 
 if __name__ == '__main__':
+
     experiment_name = 'tests_content_base_dummy_2'
-    run_experiment(experiment_name)
+    run_experiment(experiment_name= experiment_name, top_k = 15)

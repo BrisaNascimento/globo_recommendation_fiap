@@ -55,6 +55,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+flavio_testes/
 
 #MLRuns
 mlruns/
