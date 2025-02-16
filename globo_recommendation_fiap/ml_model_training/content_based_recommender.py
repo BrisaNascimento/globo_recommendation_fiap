@@ -44,7 +44,7 @@ class ContentRecomender:
 
         if self.top_k == -1:
             return recommended_articles[['page', 'cosine_similarity']]
-        
+
         else:
             return recommended_articles[['page', 'cosine_similarity']].head(
                 self.top_k
@@ -92,18 +92,20 @@ class ContentRecomender:
             np.vstack(recent_news['content_embbeding']), embeddings
         )
 
-        # Calculate the mean of all embeddings 
-        cosine_similarities = pd.DataFrame(cosine_similarities.mean(axis=1), columns=['cosine_similarity'])
+        # Calculate the mean of all embeddings
+        cosine_similarities = pd.DataFrame(
+            cosine_similarities.mean(axis=1), columns=['cosine_similarity']
+        )
 
         recent_news['cosine_similarity'] = cosine_similarities
 
-        # ranking by value, from lowest to highest 
+        # ranking by value, from lowest to highest
         recommended_articles = recent_news.sort_values(
             by='cosine_similarity', ascending=False
         )
 
         if self.top_k != -1:
-            recommended_articles = recommended_articles.iloc[:self.top_k]
+            recommended_articles = recommended_articles.iloc[: self.top_k]
 
         # Concatenate all recommendations into a single DataFrame
         return recommended_articles
