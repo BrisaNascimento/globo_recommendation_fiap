@@ -9,4 +9,4 @@ The following project has been build in a simplified architecture which relies o
 
 Below you can see an image of this architecture:
 
-![REcommendation System](assets/Diagram2.drawio.png)
+![Recommendation System](assets/Diagram2.drawio.png)
