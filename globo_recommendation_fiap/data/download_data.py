@@ -26,15 +26,20 @@ def download_from_adls(container_name: str, file_path: str) -> pd.DataFrame:
     blob_content = blob_data.readall()
     buffer = io.BytesIO(blob_content)
     # Transform blob into a DataFrame
-    data = pd.read_parquet(buffer)
+    if file_path.endswith('.parquet'):
+        data = pd.read_parquet(buffer)
+    elif file_path.endswith('.csv'):
+        data = pd.read_csv(buffer)
+    else:
+        raise ValueError("File format is not '.parquet' or '.csv'.")
 
     print('Download from lake was sucessful.')
     return data
 
 
 if __name__ == '__main__':  # pragma: no cover
-    container_name = 'bronze'
-    file_path = 'raw/globo/validacao/validacao.parquet'
+    container_name = 'silver'
+    file_path = 'globo/acessos/ultimos_acessos.parquet'
     # file_path = "raw/globo/itens/itens.parquet"
     # file_path = "raw/globo/teste/teste.parquet"
     # file_path = "raw/globo/treino/treino.parquet"
