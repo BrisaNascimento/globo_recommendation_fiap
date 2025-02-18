@@ -1,7 +1,11 @@
+import os
+import sys
+
 import mlflow
 import numpy as np
 import pandas as pd
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from .content_based_recommender import ContentRecomender
 
 
@@ -68,5 +72,5 @@ def run_experiment(experiment_name: str, top_k: int = 10):
 
 
 if __name__ == '__main__':
-    experiment_name = 'tests_content_base_dummy_2'
+    experiment_name = 'final_model'
     run_experiment(experiment_name=experiment_name, top_k=15)

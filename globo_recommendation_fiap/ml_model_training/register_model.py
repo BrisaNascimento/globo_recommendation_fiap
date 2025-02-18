@@ -30,7 +30,7 @@ class Register:
 if __name__ == '__main__':
     # content_recommender or colab_filter_model
     model_path = 'content_recommender'
-    experiment_name = 'tests_content_base_dummy'
-    run_id = '8c6bec04403f4d19b9a3615b6d267064'
+    experiment_name = 'final_model'
+    run_id = '0408237f72474d7a9c86aeb53848dcbb'
     reg = Register(experiment_name)
     reg.register_model(run_id)
